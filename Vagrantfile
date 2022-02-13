@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     config.vm.define MASTER_NAME do |master|
         
         # Hostname and network config
-        master.vm.box = IMAGE_NAME
+        master.vm.box = asdkant/fastapi-hello-world
         master.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.10"
         master.vm.hostname = MASTER_NAME
 
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
         config.vm.define "worker-#{i}" do |worker|
 
             # Hostname and network config
-            worker.vm.box = IMAGE_NAME
+            worker.vm.box = mysql
             worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
             worker.vm.hostname = "worker-#{i}"
 
