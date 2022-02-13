@@ -48,8 +48,8 @@ Vagrant.configure("2") do |config|
     config.vm.define "worker" do |worker|
 
         # Hostname and network config
-        worker.vm.box = mysql
-        worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
+        worker.vm.box = mysql        
+        worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.1"
         worker.vm.hostname = "worker"
 
         # Ansible role setting
@@ -66,7 +66,7 @@ Vagrant.configure("2") do |config|
 
             # Overload Anqible variables
             ansible.extra_vars = {
-                node_ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
+                node_ip: "#{NODE_NETWORK_BASE}.1"
             }
         end
     end
