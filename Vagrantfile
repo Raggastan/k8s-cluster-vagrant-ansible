@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.define master do |master|
         
         # Hostname and network config
-        master.vm.box = asdkant/fastapi-hello-world
+        master.vm.box = "ubuntu/focal64"
         master.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.10"
         master.vm.hostname = master
 
