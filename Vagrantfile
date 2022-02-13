@@ -1,6 +1,5 @@
 MEM = 2048                          # Amount of RAM
 CPU = 2                             # Number of processors (Minimum value of 2 otherwise it will not work)
-WORKER_NBR = 1                      # Number of workers node
 NODE_NETWORK_BASE = "192.168.50"    # First three octets of the IP address that will be assign to all type of nodes
 POD_NETWORK = "192.168.100.0/16"    # Private network for inter-pod communication
 
