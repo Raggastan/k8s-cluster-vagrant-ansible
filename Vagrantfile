@@ -1,7 +1,3 @@
-# ####################################################################
-# ################### CONFIGURATION VARIABLES ########################
-# ####################################################################
-IMAGE_NAME = "bento/ubuntu-18.04"   # Image to use
 MEM = 2048                          # Amount of RAM
 CPU = 2                             # Number of processors (Minimum value of 2 otherwise it will not work)
 MASTER_NAME="master"                # Master node name
@@ -50,31 +46,29 @@ Vagrant.configure("2") do |config|
     end
 
     # Worker node config
-    (1..WORKER_NBR).each do |i|
-        config.vm.define "worker-#{i}" do |worker|
+    config.vm.define "worker-#{i}" do |worker|
 
-            # Hostname and network config
-            worker.vm.box = mysql
-            worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
-            worker.vm.hostname = "worker-#{i}"
+        # Hostname and network config
+        worker.vm.box = mysql
+        worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
+        worker.vm.hostname = "worker-#{i}"
 
-            # Ansible role setting
-            worker.vm.provision "ansible" do |ansible|
+        # Ansible role setting
+        worker.vm.provision "ansible" do |ansible|
 
-                # Ansbile role that will be launched
-                ansible.playbook = "roles/main.yml"
+            # Ansbile role that will be launched
+            ansible.playbook = "roles/main.yml"
 
-                # Groups in Ansible inventory
-                ansible.groups = {
-                    "masters" => ["#{MASTER_NAME}"],
-                    "workers" => ["worker-[1:#{WORKER_NBR}]"]
-                }
+            # Groups in Ansible inventory
+            ansible.groups = {
+                "masters" => ["#{MASTER_NAME}"],
+                "workers" => ["worker-[1:#{WORKER_NBR}]"]
+            }
 
-                # Overload Anqible variables
-                ansible.extra_vars = {
-                    node_ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
-                }
-            end
+            # Overload Anqible variables
+            ansible.extra_vars = {
+                node_ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
+            }
         end
     end
 end
