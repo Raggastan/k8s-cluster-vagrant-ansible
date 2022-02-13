@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
                 "workers" => ["worker-[1:#{WORKER_NBR}]"]
             }
 
-            # Overload Anqible variables
+            # Overload Ansible variables
             ansible.extra_vars = {
                 node_ip: "#{NODE_NETWORK_BASE}.1"
             }
