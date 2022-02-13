@@ -26,16 +26,16 @@ Vagrant.configure("2") do |config|
         # Ansible role setting
         master.vm.provision "ansible" do |ansible|
             
-            # Ansbile role that will be launched
+            # Ansible role that will be launched
             ansible.playbook = "roles/main.yml"
 
             # Groups in Ansible inventory
             ansible.groups = {
-                "masters" => ["#{master}"],
-                "workers" => ["worker-[1:#{WORKER_NBR}]"]
+                "masters" => ["master"],
+                "workers" => ["worker"]
             }
 
-            # Overload Anqible variables
+            # Overload Ansible variables
             ansible.extra_vars = {
                 node_ip: "#{NODE_NETWORK_BASE}.10",
                 node_name: "master",
@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
         # Ansible role setting
         worker.vm.provision "ansible" do |ansible|
 
-            # Ansbile role that will be launched
+            # Ansible role that will be launched
             ansible.playbook = "roles/main.yml"
 
             # Groups in Ansible inventory
@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
                 "workers" => ["worker-[1:#{WORKER_NBR}]"]
             }
 
-            # Overload Anqible variables
+            # Overload Ansible variables
             ansible.extra_vars = {
                 node_ip: "#{NODE_NETWORK_BASE}.1"
             }
