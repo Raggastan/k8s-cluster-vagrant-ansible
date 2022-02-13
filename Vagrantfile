@@ -31,8 +31,8 @@ Vagrant.configure("2") do |config|
 
             # Groups in Ansible inventory
             ansible.groups = {
-                "masters" => ["#{master}"],
-                "workers" => ["worker-[1:#{WORKER_NBR}]"]
+                "masters" => ["master"],
+                "workers" => ["worker"]
             }
 
             # Overload Anqible variables
