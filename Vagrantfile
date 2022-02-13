@@ -46,12 +46,12 @@ Vagrant.configure("2") do |config|
     end
 
     # Worker node config
-    config.vm.define "worker-#{i}" do |worker|
+    config.vm.define "worker" do |worker|
 
         # Hostname and network config
         worker.vm.box = mysql
         worker.vm.network "private_network", ip: "#{NODE_NETWORK_BASE}.#{i + 10}"
-        worker.vm.hostname = "worker-#{i}"
+        worker.vm.hostname = "worker"
 
         # Ansible role setting
         worker.vm.provision "ansible" do |ansible|
